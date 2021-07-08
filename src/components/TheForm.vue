@@ -1,5 +1,7 @@
 <template>
   <div class="container">
+    <!-- PRODUCT INFO -->
+
     <div class="product-info">
       <h3>Вы покупаете</h3>
       <div class="product-info-container">
@@ -27,12 +29,16 @@
       </div>
     </div>
 
+    <!-- PAYMENT INFO -->
+
     <div class="paymant-info">
       <div class="sub-header">
         <h2>Информация Об Оплате</h2>
       </div>
       <div class="client-info">
-        <form>
+        <!-- THE FORM -->
+
+        <form @submit.prevent="submitForm">
           <div>
             <div class="form-control">
               <input
@@ -40,10 +46,12 @@
                 id="company"
                 name="company"
                 type="checkbox"
+                v-model="corporatePurchase"
               />
               <label for="company">Корпоративная покупка</label>
             </div>
-            <div class="form-control">
+
+            <div class="form-control" v-if="onCorporatePurchase">
               <input
                 type="text"
                 class="form-control-sm"
@@ -51,8 +59,10 @@
                 name="billing-company"
                 placeholder="Название компании *"
                 required=""
+                v-model="companyName"
               />
             </div>
+
             <div class="form-control">
               <input
                 type="email"
@@ -61,8 +71,10 @@
                 name="billing-email"
                 placeholder="Адрес электронной почты *"
                 required=""
+                v-model="userEmail"
               />
             </div>
+
             <div class="form-control">
               <input
                 type="text"
@@ -71,8 +83,10 @@
                 name="billing-first-name"
                 placeholder="Имя *"
                 required=""
+                v-model="userName"
               />
             </div>
+
             <div class="form-control">
               <input
                 type="text"
@@ -81,8 +95,10 @@
                 name="billing-last-name"
                 placeholder="Фамилия *"
                 required=""
+                v-model="userSurname"
               />
             </div>
+
             <div class="form-control">
               <input
                 type="text"
@@ -91,8 +107,10 @@
                 name="billing-address"
                 placeholder="Полный адрес *"
                 required=""
+                v-model="street"
               />
             </div>
+
             <div class="form-control">
               <input
                 type="text"
@@ -101,8 +119,10 @@
                 name="billing-city"
                 placeholder="Город *"
                 required=""
+                v-model="city"
               />
             </div>
+
             <div class="form-control">
               <input
                 type="text"
@@ -112,14 +132,17 @@
                 required=""
                 name="billing-zip"
                 data-action="BillingZipChange"
+                v-model="index"
               />
             </div>
+
             <div class="form-control">
               <select
                 id="country"
                 name="country"
                 class="form-control-sm"
                 aria-placeholder=""
+                v-model="country"
               >
                 <option value="Afghanistan">Afghanistan</option>
                 <option value="Åland Islands">Åland Islands</option>
@@ -431,6 +454,7 @@
                 <option value="Zimbabwe">Zimbabwe</option>
               </select>
             </div>
+
             <div class="form-control">
               <input
                 type="phone"
@@ -439,28 +463,22 @@
                 name="billing-contact-phone"
                 placeholder="Номер телефона "
                 required=""
+                v-model="phoneNumber"
               />
             </div>
+
             <div class="form-control">
               <input
                 class="company"
                 id="company"
                 name="company"
                 type="checkbox"
+                v-model="license"
               />
               <label for="company">Лицензия для другого лица.</label>
             </div>
-            <div class="form-control">
-              <input
-                type="email"
-                class="form-control-sm"
-                id="license-email"
-                name="billing-email-license"
-                placeholder="Email лицензиата *"
-                required=""
-              />
-            </div>
-            <div class="form-control">
+
+            <div class="form-control" v-if="onLicense">
               <input
                 type="text"
                 class="form-control-sm"
@@ -468,9 +486,25 @@
                 name="billing-first-name-license"
                 placeholder="Имя лицензиата *"
                 required=""
+                v-model="licenseName"
+              />
+            </div>
+
+            <div class="form-control" v-if="onLicense">
+              <input
+                type="email"
+                class="form-control-sm"
+                id="license-email"
+                name="billing-email-license"
+                placeholder="Email лицензиата *"
+                required=""
+                v-model="licenseEmail"
               />
             </div>
           </div>
+
+          <!-- PAYMENT INFO -->
+
           <div class="payment-info">
             <div class="form-control">
               <select class="form-control-sm" id="payment">
@@ -480,6 +514,7 @@
                 <option>Заказ на закупку</option>
               </select>
             </div>
+
             <div class="form-control">
               <input
                 data-hj-masked=""
@@ -489,8 +524,10 @@
                 name="cc-number"
                 placeholder="Номер карты*"
                 required=""
+                v-model="cardNumber"
               />
             </div>
+
             <div class="form-contorl-section">
               <div class="form-control">
                 <select class="form-control-sm" id="month">
@@ -532,6 +569,7 @@
                   <option>40</option>
                 </select>
               </div>
+
               <div class="form-control">
                 <input
                   type="text"
@@ -542,16 +580,19 @@
                   required=""
                 />
               </div>
+
               <div class="form-control">
                 <input
                   class="company"
                   id="company"
                   name="company"
                   type="checkbox"
+                  v-model="coupon"
                 />
                 <label for="company">У меня есть код купона.</label>
               </div>
-              <div class="coupon-container">
+
+              <div class="coupon-container" v-if="onCoupon">
                 <input
                   type="text"
                   id="coupon-code"
@@ -564,7 +605,9 @@
               </div>
             </div>
           </div>
+
           <hr />
+
           <div class="submit-form">
             <div class="certificates">
               <div class="certificate">
@@ -614,7 +657,74 @@
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      corporatePurchase: false,
+      companyName: '',
+      userEmail: '',
+      userName: '',
+      userSurname: '',
+      street: '',
+      city: '',
+      country: 'Ukraine',
+      index: '',
+      phoneNumber: '',
+      cardNumber: '',
+      license: false,
+      licenseName: '',
+      licenseEmail: '',
+      coupon: false,
+    };
+  },
+
+  computed: {
+    onCorporatePurchase() {
+      return this.corporatePurchase;
+    },
+    onLicense() {
+      return this.license;
+    },
+    onCoupon() {
+      return this.coupon;
+    },
+  },
+
+  methods: {
+    submitForm() {
+      console.log('CorporatePurchase: ' + this.corporatePurchase);
+      this.corporatePurchase = false;
+      console.log('Companyname: ' + this.companyName);
+      this.companyName = '';
+      console.log('Useremail: ' + this.userEmail);
+      this.userEmail = '';
+      console.log('Username: ' + this.userName);
+      this.userName = '';
+      console.log('Usersurname: ' + this.userSurname);
+      this.userSurname = '';
+      console.log('Street: ' + this.street);
+      this.street = '';
+      console.log('City: ' + this.city);
+      this.city = '';
+      console.log('Index: ' + this.index);
+      this.index = '';
+      console.log('Country: ' + this.country);
+      this.country = 'Ukraine';
+      console.log('Phonenumber: ' + this.phoneNumber);
+      this.phoneNumber = '';
+      console.log('Cardnumber: ' + this.cardNumber);
+      this.cardNumber = '';
+      console.log('License: ' + this.license);
+      this.license = false;
+      console.log('LicenseName: ' + this.licenseName);
+      this.licenseName = '';
+      console.log('LicenseEmail: ' + this.licenseEmail);
+      this.licenseEmail = '';
+      console.log('Coupon: ' + this.coupon);
+      this.coupon = false;
+    },
+  },
+};
 </script>
 
 <style scoped>
