@@ -1,56 +1,4 @@
 <template>
-  <!-- <form>
-    <div class="form-control">
-      <label for="user-name">Your Name</label>
-      <input id="user-name" name="user-name" type="text" />
-    </div>
-    <div class="form-control">
-      <label for="age">Your Age (Years)</label>
-      <input id="age" name="age" type="number" />
-    </div>
-    <div class="form-control">
-      <label for="referrer">How did you hear about us?</label>
-      <select id="referrer" name="referrer">
-        <option value="google">Google</option>
-        <option value="wom">Word of mouth</option>
-        <option value="newspaper">Newspaper</option>
-      </select>
-    </div>
-    <div class="form-control">
-      <h2>What are you interested in?</h2>
-      <div>
-        <input id="interest-news" name="interest" type="checkbox" />
-        <label for="interest-news">News</label>
-      </div>
-      <div>
-        <input id="interest-tutorials" name="interest" type="checkbox" />
-        <label for="interest-tutorials">Tutorials</label>
-      </div>
-      <div>
-        <input id="interest-nothing" name="interest" type="checkbox" />
-        <label for="interest-nothing">Nothing</label>
-      </div>
-    </div>
-    <div class="form-control">
-      <h2>How do you learn?</h2>
-      <div>
-        <input id="how-video" name="how" type="radio" />
-        <label for="how-video">Video Courses</label>
-      </div>
-      <div>
-        <input id="how-blogs" name="how" type="radio" />
-        <label for="how-blogs">Blogs</label>
-      </div>
-      <div>
-        <input id="how-other" name="how" type="radio" />
-        <label for="how-other">Other</label>
-      </div>
-    </div>
-    <div>
-      <button>Save Data</button>
-    </div>
-  </form> -->
-
   <div class="container">
     <div class="product-info">
       <h3>Вы покупаете</h3>
@@ -620,10 +568,38 @@
           <div class="submit-form">
             <div class="certificates">
               <div class="certificate">
-                <a href=""></a>
+                <a
+                  href="https://store.payproglobal.com/Certificates/PCIDSSCompliancyStatus.html"
+                >
+                  <img
+                    class="certificate-img"
+                    src="https://store.payproglobal.com/content/f/3/1.8_abd_tpl_new/images/new-pci.png"
+                    alt="certificate"
+                  />
+                </a>
               </div>
-              <div class="certificate"></div>
-              <div class="certificate"></div>
+              <div class="certificate trusted">
+                <a
+                  href="https://www.trustedsite.com/verify?host=store.payproglobal.com"
+                >
+                  <img
+                    class="certificate-img"
+                    src="https://store.payproglobal.com/content/f/3/1.8_abd_tpl_new/images/TrustedSite.svg"
+                    alt=""
+                  />
+                </a>
+              </div>
+              <div class="certificate">
+                <a
+                  href="https://seal.digicert.com/seals/popup/?tag=0pitJRnD&url=payproglobal.com&lang=en"
+                >
+                  <img
+                    class="certificate-img"
+                    src="https://store.payproglobal.com/content/f/3/1.8_abd_tpl_new/images/NortonSeal_PoweredbyDigiCert.png"
+                    alt=""
+                  />
+                </a>
+              </div>
             </div>
             <div class="submit-block">
               <button type="submit" name="submit-button" class="btn-primary">
@@ -638,15 +614,29 @@
 </template>
 
 <style scoped>
+.certificate-img {
+  margin: 0 auto;
+}
+
+.trusted {
+  margin-left: 7px;
+}
+.certificates {
+  display: flex;
+  margin: 15px 0;
+  justify-content: space-between;
+  /* padding: 0 10px; */
+}
+
 hr {
   display: block;
   margin-top: 35px;
   width: 100%;
-  border-top: solid 1px #d6d6d6;
+  /* border-top: solid 1px #d6d6d6; */
   margin-bottom: 0;
   box-sizing: content-box;
   height: 0;
-  overflow: visible;
+  /* overflow: visible; */
 }
 
 .btn-primary {
@@ -698,6 +688,9 @@ hr {
   max-width: 660px;
   padding-left: 16px;
   padding-right: 16px;
+  max-width: 660px;
+  margin-right: auto;
+  margin-left: auto;
 }
 
 .product-info-container {

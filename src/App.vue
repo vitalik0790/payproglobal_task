@@ -1,13 +1,18 @@
 <template>
-  <the-form></the-form>
+  <div>
+    <the-header></the-header>
+    <the-form></the-form>
+  </div>
 </template>
 
 <script>
 import TheForm from './components/TheForm.vue';
+import TheHeader from './components/TheHeader.vue';
 
 export default {
   components: {
     TheForm,
+    TheHeader,
   },
 };
 </script>
@@ -21,6 +26,10 @@ export default {
 
 html {
   font-family: 'Noto Sans', serif;
+}
+
+div {
+  width: 100%;
 }
 
 img {
