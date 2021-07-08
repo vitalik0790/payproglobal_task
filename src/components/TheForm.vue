@@ -728,6 +728,7 @@ hr {
 
 .price {
   padding-top: 15px;
+  text-align: end;
 }
 
 .total {
@@ -740,6 +741,10 @@ hr {
   font-weight: 500;
   line-height: 28px;
   letter-spacing: 0.2ex;
+}
+
+.total-2 {
+  text-align: end;
 }
 
 .sub-header {
