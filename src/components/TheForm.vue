@@ -613,6 +613,10 @@
   </div>
 </template>
 
+<script>
+export default {};
+</script>
+
 <style scoped>
 .certificate-img {
   margin: 0 auto;
@@ -634,6 +638,7 @@ hr {
   width: 100%;
   /* border-top: solid 1px #d6d6d6; */
   margin-bottom: 0;
+  margin-right: 0;
   box-sizing: content-box;
   height: 0;
   /* overflow: visible; */
