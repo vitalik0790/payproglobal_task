@@ -3,27 +3,29 @@
     <!-- PRODUCT INFO -->
 
     <div class="product-info">
-      <h3>Вы покупаете</h3>
-      <div class="product-info-container">
-        <div class="product">
-          <div class="media">
-            <img
-              class="media-object"
-              src="https://store.payproglobal.com/Content/img/upd/product-logo.png"
-              alt="Antony Test"
-            />
-            <span class="media-name">Antony Test</span>
+      <div class="fixed-container">
+        <h3>Вы покупаете</h3>
+        <div class="product-info-container">
+          <div class="product">
+            <div class="media">
+              <img
+                class="media-object"
+                src="https://store.payproglobal.com/Content/img/upd/product-logo.png"
+                alt="Antony Test"
+              />
+              <span class="media-name">Antony Test</span>
+            </div>
+            <div class="price">
+              <span class="price">2,769.92 UAN</span>
+            </div>
           </div>
-          <div class="price">
-            <span>2,769.92 UAN</span>
-          </div>
-        </div>
-        <div class="total">
-          <div class="total-1">
-            <span>ИТОГО:</span>
-          </div>
-          <div class="total-2">
-            <span>2,769.92 UAN</span>
+          <div class="total">
+            <div class="total-1">
+              <span>ИТОГО:</span>
+            </div>
+            <div class="total-2">
+              <span>2,769.92 UAN</span>
+            </div>
           </div>
         </div>
       </div>
@@ -31,7 +33,7 @@
 
     <!-- PAYMENT INFO -->
 
-    <div class="paymant-info">
+    <div class="payment-info-container">
       <div class="sub-header">
         <h2>Информация Об Оплате</h2>
       </div>
@@ -51,7 +53,11 @@
               <label for="company">Корпоративная покупка</label>
             </div>
 
-            <div class="form-control" v-if="onCorporatePurchase">
+            <div
+              class="form-control"
+              :class="{ invalid: companyNameValidity === 'invalid' }"
+              v-if="onCorporatePurchase"
+            >
               <input
                 type="text"
                 class="form-control-sm"
@@ -59,11 +65,18 @@
                 name="billing-company"
                 placeholder="Название компании *"
                 required=""
-                v-model="companyName"
+                v-model.trim="companyName"
+                @blur="validateCompany"
               />
+              <p class="error-message" v-if="companyNameValidity === 'invalid'">
+                Пожалуйста, укажите название компании правильно.
+              </p>
             </div>
 
-            <div class="form-control">
+            <div
+              class="form-control"
+              :class="{ invalid: userEmailValidity === 'invalid' }"
+            >
               <input
                 type="email"
                 class="form-control-sm"
@@ -72,34 +85,60 @@
                 placeholder="Адрес электронной почты *"
                 required=""
                 v-model="userEmail"
+                @blur="validateUserEmail"
               />
+              <p class="error-message" v-if="userEmailValidity === 'invalid'">
+                Пожалуйста, укажите адрес электронной почты правильно.
+              </p>
             </div>
 
-            <div class="form-control">
-              <input
-                type="text"
-                class="form-control-sm"
-                id="firstname"
-                name="billing-first-name"
-                placeholder="Имя *"
-                required=""
-                v-model="userName"
-              />
+            <div class="flex-container form-control">
+              <div
+                class="form-control left"
+                :class="{ invalid: userNameValidity === 'invalid' }"
+              >
+                <input
+                  type="text"
+                  class="form-control-sm"
+                  id="firstname"
+                  name="billing-first-name"
+                  placeholder="Имя *"
+                  required=""
+                  v-model="userName"
+                  @blur="validateUserName"
+                />
+                <p class="error-message" v-if="userNameValidity === 'invalid'">
+                  Имя является обязательным полом.
+                </p>
+              </div>
+
+              <div
+                class="form-control"
+                :class="{ invalid: userSurnameValidity === 'invalid' }"
+              >
+                <input
+                  type="text"
+                  class="form-control-sm"
+                  id="lastname"
+                  name="billing-last-name"
+                  placeholder="Фамилия *"
+                  required=""
+                  v-model="userSurname"
+                  @blur="validateUserSurname"
+                />
+                <p
+                  class="error-message"
+                  v-if="userSurnameValidity === 'invalid'"
+                >
+                  Фамилия является обязательным полом.
+                </p>
+              </div>
             </div>
 
-            <div class="form-control">
-              <input
-                type="text"
-                class="form-control-sm"
-                id="lastname"
-                name="billing-last-name"
-                placeholder="Фамилия *"
-                required=""
-                v-model="userSurname"
-              />
-            </div>
-
-            <div class="form-control">
+            <div
+              class="form-control"
+              :class="{ invalid: streetValidity === 'invalid' }"
+            >
               <input
                 type="text"
                 class="form-control-sm"
@@ -108,32 +147,45 @@
                 placeholder="Полный адрес *"
                 required=""
                 v-model="street"
+                @blur="validateStreet"
               />
+              <p class="error-message" v-if="streetValidity === 'invalid'">
+                Пожалуйста, укажите адрес для выставления счета.
+              </p>
             </div>
 
-            <div class="form-control">
-              <input
-                type="text"
-                class="form-control-sm"
-                id="city"
-                name="billing-city"
-                placeholder="Город *"
-                required=""
-                v-model="city"
-              />
-            </div>
+            <div class="flex-container form-control">
+              <div
+                class="form-control left"
+                :class="{ invalid: cityValidity === 'invalid' }"
+              >
+                <input
+                  type="text"
+                  class="form-control-sm"
+                  id="city"
+                  name="billing-city"
+                  placeholder="Город *"
+                  required=""
+                  v-model="city"
+                  @blur="validateCity"
+                />
+                <p class="error-message" v-if="streetValidity === 'invalid'">
+                  Пожалуйста, укажите город для выставления счета.
+                </p>
+              </div>
 
-            <div class="form-control">
-              <input
-                type="text"
-                class="form-control-sm"
-                id="zip"
-                placeholder="Индекс "
-                required=""
-                name="billing-zip"
-                data-action="BillingZipChange"
-                v-model="index"
-              />
+              <div class="form-control">
+                <input
+                  type="text"
+                  class="form-control-sm"
+                  id="zip"
+                  placeholder="Индекс "
+                  required=""
+                  name="billing-zip"
+                  data-action="BillingZipChange"
+                  v-model="index"
+                />
+              </div>
             </div>
 
             <div class="form-control">
@@ -507,7 +559,11 @@
 
           <div class="payment-info">
             <div class="form-control">
-              <select class="form-control-sm" id="payment">
+              <select
+                class="form-control-sm"
+                id="payment"
+                v-model="wayOfPayment"
+              >
                 <option>Кредитная/Дебетовая Карта</option>
                 <option>PayPal</option>
                 <option>Денежный перевод</option>
@@ -515,7 +571,11 @@
               </select>
             </div>
 
-            <div class="form-control">
+            <div
+              v-if="wayOfPayment === 'Кредитная/Дебетовая Карта'"
+              class="form-control"
+              :class="{ invalid: cardNumberValidity === 'invalid' }"
+            >
               <input
                 data-hj-masked=""
                 type="text"
@@ -525,12 +585,19 @@
                 placeholder="Номер карты*"
                 required=""
                 v-model="cardNumber"
+                @blur="validateCardNumber"
               />
+              <p class="error-message" v-if="cardNumberValidity === 'invalid'">
+                Номер кредитной карты является обязательным полем.
+              </p>
             </div>
 
-            <div class="form-contorl-section">
+            <div
+              v-if="wayOfPayment === 'Кредитная/Дебетовая Карта'"
+              class="form-contorl-section"
+            >
               <div class="form-control">
-                <select class="form-control-sm" id="month">
+                <select class="form-control-sm" id="month" v-model="month">
                   <option>01</option>
                   <option>02</option>
                   <option>03</option>
@@ -545,8 +612,12 @@
                   <option>12</option>
                 </select>
               </div>
-              <div class="form-contorl">
-                <select class="form-control-sm" id="year">
+
+              <div
+                v-if="wayOfPayment === 'Кредитная/Дебетовая Карта'"
+                class="form-contorl"
+              >
+                <select class="form-control-sm" id="year" v-model="year">
                   <option>21</option>
                   <option>22</option>
                   <option>23</option>
@@ -570,7 +641,10 @@
                 </select>
               </div>
 
-              <div class="form-control">
+              <div
+                v-if="wayOfPayment === 'Кредитная/Дебетовая Карта'"
+                class="form-control"
+              >
                 <input
                   type="text"
                   class="form-control-sm"
@@ -578,35 +652,88 @@
                   name="cc-number"
                   placeholder="Код безопасности*"
                   required=""
+                  v-model="securityCode"
                 />
               </div>
+            </div>
+            <div v-if="wayOfPayment === 'PayPal'" class="form-control">
+              <input
+                type="text"
+                class="form-control-sm"
+                id="paypal"
+                name="paypal-email"
+                placeholder="Email адрес PayPal*"
+                required=""
+                v-model="payPalEmail"
+              />
+            </div>
 
-              <div class="form-control">
-                <input
-                  class="company"
-                  id="company"
-                  name="company"
-                  type="checkbox"
-                  v-model="coupon"
-                />
-                <label for="company">У меня есть код купона.</label>
-              </div>
+            <div class="form-paragraph" v-if="wayOfPayment === 'PayPal'">
+              * При нажатии на кнопку "Разместить заказ", Вы будете направлены
+              на защищенную страницу PayPal для завершения заказа. <br />
+              Настоятельно рекомендуется использовать Ваш проверенный PayPal
+              Email. В противном случае возможны задержки при обработке заказа.
+            </div>
 
-              <div class="coupon-container" v-if="onCoupon">
-                <input
-                  type="text"
-                  id="coupon-code"
-                  class="form-control-sm"
-                  name="coupon-code-to-add"
-                />
-                <span class="coupon-btn">
-                  <button class="btn" type="submit">Применить</button>
-                </span>
+            <div
+              class="form-paragraph"
+              v-if="wayOfPayment === 'Денежный перевод'"
+            >
+              <div class="paragraph">
+                * При нажатии на кнопку "Разместить Заказ", Вы будете
+                направленны на страницу с инструкциями по оплате денежным
+                переводом.
               </div>
+              <div>
+                Денежный перевод предполагает дополнительную оплату ручной
+                обработки в размере 8.18 GBP , которая будет добавленна к общей
+                сумме Вашего заказа.
+              </div>
+            </div>
+
+            <div
+              class="form-paragraph"
+              v-if="wayOfPayment === 'Заказ на закупку'"
+            >
+              <div class="paragraph">
+                * При нажатии на кнопку "Разместить Заказ", Вы будете
+                направленны на страницу с инструкциями по оплате денежным
+                переводом, кредитной картой или чеком.
+              </div>
+              <div>
+                Заказ на закупку предполагает дополнительную оплату ручной
+                обработки в размере 8.18 GBP , которая будет добавленна к общей
+                сумме Вашего заказа.
+              </div>
+            </div>
+
+            <div class="form-control">
+              <input
+                class="company"
+                id="company"
+                name="company"
+                type="checkbox"
+                v-model="coupon"
+              />
+              <label for="company">У меня есть код купона.</label>
+            </div>
+
+            <div class="coupon-container" v-if="onCoupon">
+              <input
+                type="text"
+                id="coupon-code"
+                class="form-control-sm"
+                name="coupon-code-to-add"
+              />
+              <span class="coupon-btn">
+                <button class="btn" type="submit">Применить</button>
+              </span>
             </div>
           </div>
 
           <hr />
+
+          <!-- SUBMIT FORM SECTION -->
 
           <div class="submit-form">
             <div class="certificates">
@@ -662,35 +789,85 @@ export default {
     return {
       corporatePurchase: false,
       companyName: '',
+      companyNameValidity: 'pending',
       userEmail: '',
+      userEmailValidity: 'pending',
       userName: '',
+      userNameValidity: 'pending',
       userSurname: '',
+      userSurnameValidity: 'pending',
       street: '',
+      streetValidity: 'pending',
       city: '',
-      country: 'Ukraine',
+      cityValidity: 'pending',
       index: '',
+      country: 'Ukraine',
       phoneNumber: '',
-      cardNumber: '',
       license: false,
       licenseName: '',
       licenseEmail: '',
+      wayOfPayment: 'Кредитная/Дебетовая Карта',
+      cardNumber: '',
+      cardNumberValidity: 'pending',
+      month: '01',
+      year: '21',
+      securityCode: '',
+      payPalEmail: '',
       coupon: false,
     };
   },
 
-  computed: {
-    onCorporatePurchase() {
-      return this.corporatePurchase;
-    },
-    onLicense() {
-      return this.license;
-    },
-    onCoupon() {
-      return this.coupon;
-    },
-  },
-
   methods: {
+    validateCompany() {
+      if (this.companyName === '') {
+        this.companyNameValidity = 'invalid';
+      } else {
+        this.companyNameValidity = 'valid';
+      }
+    },
+    validateUserEmail() {
+      if (this.userEmail === '') {
+        this.userEmailValidity = 'invalid';
+      } else {
+        this.userEmailValidity = 'valid';
+      }
+    },
+    validateUserName() {
+      if (this.userName === '') {
+        this.userNameValidity = 'invalid';
+      } else {
+        this.userNameValidity = 'valid';
+      }
+    },
+    validateUserSurname() {
+      if (this.userSurname === '') {
+        this.userSurnameValidity = 'invalid';
+      } else {
+        this.userSurnameValidity = 'valid';
+      }
+    },
+    validateStreet() {
+      if (this.street === '') {
+        this.streetValidity = 'invalid';
+      } else {
+        this.streetValidity = 'valid';
+      }
+    },
+    validateCity() {
+      if (this.city === '') {
+        this.cityValidity = 'invalid';
+      } else {
+        this.cityValidity = 'valid';
+      }
+    },
+    validateCardNumber() {
+      if (this.cardNumber === '' && this.cardNumber.length < 16) {
+        this.cardNumberValidity = 'invalid';
+      } else {
+        this.cardNumberValidity = 'valid';
+      }
+    },
+
     submitForm() {
       console.log('CorporatePurchase: ' + this.corporatePurchase);
       this.corporatePurchase = false;
@@ -712,22 +889,71 @@ export default {
       this.country = 'Ukraine';
       console.log('Phonenumber: ' + this.phoneNumber);
       this.phoneNumber = '';
-      console.log('Cardnumber: ' + this.cardNumber);
-      this.cardNumber = '';
       console.log('License: ' + this.license);
       this.license = false;
       console.log('LicenseName: ' + this.licenseName);
       this.licenseName = '';
       console.log('LicenseEmail: ' + this.licenseEmail);
       this.licenseEmail = '';
+      console.log('WayOfPayment: ' + this.wayOfPayment);
+      this.wayOfPayment = 'Кредитная/Дебетовая Карта';
+      console.log('Cardnumber: ' + this.cardNumber);
+      this.cardNumber = '';
+      console.log('Month: ' + this.month);
+      this.month = '01';
+      console.log('Year: ' + this.year);
+      this.year = '21';
+      console.log('SecurityCode: ' + this.securityCode);
+      this.securityCode = '';
+      console.log('PayPal: ' + this.payPalEmail);
+      this.payPalEmail = '';
       console.log('Coupon: ' + this.coupon);
       this.coupon = false;
+    },
+  },
+  computed: {
+    onCorporatePurchase() {
+      return this.corporatePurchase;
+    },
+    onLicense() {
+      return this.license;
+    },
+    onCoupon() {
+      return this.coupon;
     },
   },
 };
 </script>
 
 <style scoped>
+@media screen and (min-width: 768px) {
+  .left {
+    margin-right: 10px !important;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .submit-form {
+    position: relative;
+    width: 628px;
+  }
+}
+
+.paragraph {
+  margin-bottom: 5px;
+}
+.form-paragraph {
+  font-size: 12px;
+  margin-bottom: 15px;
+  line-height: 1.5;
+  font-weight: 400;
+  text-align: left;
+}
+
+.form-control.invalid input {
+  border-color: red;
+}
+
 .certificate-img {
   margin: 0 auto;
 }
@@ -752,6 +978,12 @@ hr {
   box-sizing: content-box;
   height: 0;
   /* overflow: visible; */
+}
+
+@media screen and (min-width: 768px) {
+  hr {
+    width: 628px;
+  }
 }
 
 .btn-primary {
@@ -788,6 +1020,21 @@ hr {
   margin-top: 15px;
 }
 
+@media screen and (min-width: 768px) {
+  .payment-info-container {
+    padding-left: 8px;
+    padding-right: 8px;
+    width: 322px;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .product-info {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+}
+
 .form-control-sm {
   background: #fff;
   border: 1px solid #e1e1e1;
@@ -800,7 +1047,7 @@ hr {
 }
 
 .container {
-  max-width: 660px;
+  width: 540px;
   padding-left: 16px;
   padding-right: 16px;
   max-width: 660px;
@@ -808,10 +1055,39 @@ hr {
   margin-left: auto;
 }
 
+@media screen and (min-width: 768px) {
+  .container {
+    width: 720px;
+    display: flex;
+    flex-direction: row-reverse;
+  }
+}
+
 .product-info-container {
   background: #fff;
   border: 1px #e1e1e1 solid;
   border-radius: 7px;
+}
+
+@media screen and (min-width: 768px) {
+  .fixed-container {
+    position: fixed;
+    top: 75px;
+    width: 306px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .flex-container {
+    display: block;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .flex-container {
+    display: flex;
+    height: 32px;
+  }
 }
 
 .media {
@@ -827,6 +1103,7 @@ hr {
 .media-name {
   display: block;
   font-weight: 700;
+  width: 100px;
 }
 
 .product {
@@ -837,7 +1114,7 @@ hr {
 }
 
 .price {
-  padding-top: 15px;
+  padding-top: 20px;
   text-align: end;
 }
 
@@ -847,28 +1124,23 @@ hr {
   padding: 13px 15px;
   color: #000;
   text-transform: uppercase;
-  font-size: 21px;
+  font-size: 20px;
   font-weight: 500;
   line-height: 28px;
-  letter-spacing: 0.2ex;
+  /* letter-spacing: 0.2ex; */
 }
 
 .total-2 {
   text-align: end;
 }
 
+.price {
+  font-size: 14px;
+}
+
 .sub-header {
   margin: 13px 0 3px;
 }
-
-/* form {
-  margin: 2rem auto;
-  max-width: 40rem;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
-  padding: 2rem;
-  background-color: #ffffff;
-} */
 
 .form-control {
   margin: 0.5rem 0;
@@ -929,9 +1201,11 @@ input[type='radio'] + label {
   cursor: pointer;
 }
 
-/* button:hover,
-button:active {
-  border-color: #002350;
-  background-color: #002350;
-} */
+.error-message {
+  padding-left: 10px;
+  display: block;
+  margin: 0;
+  font-size: 12px;
+  color: red;
+}
 </style>

@@ -41,5 +41,6 @@ body {
   background-color: #eee;
   line-height: 1.5;
   color: #373a3c !important;
+  letter-spacing: 0.08em;
 }
 </style>
