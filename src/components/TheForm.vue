@@ -37,12 +37,13 @@
       <div class="sub-header">
         <h2>Информация Об Оплате</h2>
       </div>
-      <div class="client-info">
-        <!-- THE FORM -->
 
+      <!-- THE FORM -->
+
+      <div class="client-info">
         <form @submit.prevent="submitForm">
           <div>
-            <div class="form-control">
+            <div class="form-control checkbox">
               <input
                 class="company"
                 id="company"
@@ -92,7 +93,7 @@
               </p>
             </div>
 
-            <div class="flex-container form-control">
+            <div class="form-control">
               <div
                 class="form-control left"
                 :class="{ invalid: userNameValidity === 'invalid' }"
@@ -154,7 +155,7 @@
               </p>
             </div>
 
-            <div class="flex-container form-control">
+            <div class="form-control">
               <div
                 class="form-control left"
                 :class="{ invalid: cityValidity === 'invalid' }"
@@ -169,7 +170,7 @@
                   v-model="city"
                   @blur="validateCity"
                 />
-                <p class="error-message" v-if="streetValidity === 'invalid'">
+                <p class="error-message" v-if="cityValidity === 'invalid'">
                   Пожалуйста, укажите город для выставления счета.
                 </p>
               </div>
@@ -519,7 +520,7 @@
               />
             </div>
 
-            <div class="form-control">
+            <div class="form-control checkbox">
               <input
                 class="company"
                 id="company"
@@ -594,68 +595,73 @@
 
             <div
               v-if="wayOfPayment === 'Кредитная/Дебетовая Карта'"
-              class="form-contorl-section"
+              class="form-control-section"
             >
-              <div class="form-control">
-                <select class="form-control-sm" id="month" v-model="month">
-                  <option>01</option>
-                  <option>02</option>
-                  <option>03</option>
-                  <option>04</option>
-                  <option>05</option>
-                  <option>06</option>
-                  <option>07</option>
-                  <option>08</option>
-                  <option>09</option>
-                  <option>10</option>
-                  <option>11</option>
-                  <option>12</option>
-                </select>
-              </div>
+              <div class="credit-card-container form-control">
+                <div class="credit-container">
+                  <div class="form-control">
+                    <select class="form-control-sm" id="month" v-model="month">
+                      <option>01</option>
+                      <option>02</option>
+                      <option>03</option>
+                      <option>04</option>
+                      <option>05</option>
+                      <option>06</option>
+                      <option>07</option>
+                      <option>08</option>
+                      <option>09</option>
+                      <option>10</option>
+                      <option>11</option>
+                      <option>12</option>
+                    </select>
+                  </div>
 
-              <div
-                v-if="wayOfPayment === 'Кредитная/Дебетовая Карта'"
-                class="form-contorl"
-              >
-                <select class="form-control-sm" id="year" v-model="year">
-                  <option>21</option>
-                  <option>22</option>
-                  <option>23</option>
-                  <option>24</option>
-                  <option>25</option>
-                  <option>26</option>
-                  <option>27</option>
-                  <option>28</option>
-                  <option>29</option>
-                  <option>30</option>
-                  <option>31</option>
-                  <option>32</option>
-                  <option>33</option>
-                  <option>34</option>
-                  <option>35</option>
-                  <option>36</option>
-                  <option>37</option>
-                  <option>38</option>
-                  <option>39</option>
-                  <option>40</option>
-                </select>
-              </div>
+                  <div
+                    v-if="wayOfPayment === 'Кредитная/Дебетовая Карта'"
+                    class="form-control right"
+                  >
+                    <select class="form-control-sm" id="year" v-model="year">
+                      <option>21</option>
+                      <option>22</option>
+                      <option>23</option>
+                      <option>24</option>
+                      <option>25</option>
+                      <option>26</option>
+                      <option>27</option>
+                      <option>28</option>
+                      <option>29</option>
+                      <option>30</option>
+                      <option>31</option>
+                      <option>32</option>
+                      <option>33</option>
+                      <option>34</option>
+                      <option>35</option>
+                      <option>36</option>
+                      <option>37</option>
+                      <option>38</option>
+                      <option>39</option>
+                      <option>40</option>
+                    </select>
+                  </div>
+                </div>
 
-              <div
-                v-if="wayOfPayment === 'Кредитная/Дебетовая Карта'"
-                class="form-control"
-              >
-                <input
-                  type="text"
-                  class="form-control-sm"
-                  id="cardnum"
-                  name="cc-number"
-                  placeholder="Код безопасности*"
-                  required=""
-                  v-model="securityCode"
-                />
+                <div
+                  v-if="wayOfPayment === 'Кредитная/Дебетовая Карта'"
+                  class="form-control"
+                >
+                  <input
+                    type="text"
+                    class="form-control-sm"
+                    id="cardnum"
+                    name="cc-number"
+                    placeholder="Код безопасности*"
+                    required=""
+                    v-model="securityCode"
+                  />
+                </div>
               </div>
             </div>
+
             <div v-if="wayOfPayment === 'PayPal'" class="form-control">
               <input
                 type="text"
@@ -707,7 +713,7 @@
               </div>
             </div>
 
-            <div class="form-control">
+            <div class="form-control checkbox">
               <input
                 class="company"
                 id="company"
@@ -772,9 +778,16 @@
               </div>
             </div>
             <div class="submit-block">
-              <button type="submit" name="submit-button" class="btn-primary">
+              <!-- <router-link to="/thankyou"> -->
+              <button
+                to="/thankyou"
+                type="submit"
+                name="submit-button"
+                class="btn-primary"
+              >
                 Разместить заказ
               </button>
+              <!-- </router-link> -->
             </div>
           </div>
         </form>
@@ -909,6 +922,8 @@ export default {
       this.payPalEmail = '';
       console.log('Coupon: ' + this.coupon);
       this.coupon = false;
+
+      this.$router.push('/thankyou');
     },
   },
   computed: {
@@ -926,9 +941,52 @@ export default {
 </script>
 
 <style scoped>
+.checkbox {
+  display: flex !important;
+  align-items: center;
+}
+
+input:focus,
+input:hover,
+select:focus,
+select:hover {
+  outline: 0;
+  border-color: blue !important;
+}
+
+.credit-card-container {
+  display: block;
+}
+
+@media screen and (min-width: 576px) {
+  .credit-card-container {
+    display: flex !important;
+    flex-direction: row;
+  }
+}
+
+.credit-container {
+  display: flex;
+  height: 32px;
+  justify-content: space-around;
+  align-items: center;
+}
+
+@media screen and (min-width: 576px) {
+  .credit-container {
+    margin-right: 10px !important;
+  }
+}
+
 @media screen and (min-width: 768px) {
   .left {
     margin-right: 10px !important;
+  }
+}
+
+@media screen and (min-width: 320px) {
+  .right {
+    margin-left: 10px !important;
   }
 }
 
@@ -960,12 +1018,19 @@ export default {
 
 .trusted {
   margin-left: 7px;
+  padding-top: 5px;
 }
 .certificates {
   display: flex;
   margin: 15px 0;
   justify-content: space-between;
   /* padding: 0 10px; */
+}
+
+@media screen and (min-width: 768px) {
+  .certificates {
+    padding: 0 110px;
+  }
 }
 
 hr {
@@ -1028,6 +1093,11 @@ hr {
   }
 }
 
+label {
+  letter-spacing: 0.03em;
+  margin-left: 5px;
+  font-size: 12px;
+}
 @media screen and (min-width: 768px) {
   .product-info {
     padding-left: 8px;
@@ -1042,22 +1112,23 @@ hr {
   height: 32px;
   width: 100%;
   font-size: 12px;
-  padding-left: 12px !important;
+  padding-left: 10px !important;
   padding-right: 23px !important;
 }
 
 .container {
-  width: 540px;
+  width: 100%;
   padding-left: 16px;
   padding-right: 16px;
-  max-width: 660px;
+  max-width: 540px;
   margin-right: auto;
   margin-left: auto;
 }
 
 @media screen and (min-width: 768px) {
   .container {
-    width: 720px;
+    width: 660px;
+    max-width: 660px;
     display: flex;
     flex-direction: row-reverse;
   }
@@ -1085,7 +1156,7 @@ hr {
 
 @media screen and (min-width: 768px) {
   .flex-container {
-    display: flex;
+    display: flex !important;
     height: 32px;
   }
 }
@@ -1144,12 +1215,12 @@ hr {
 
 .form-control {
   margin: 0.5rem 0;
-  display: flex;
+  display: block;
   align-items: center;
 }
 
 label {
-  font-size: 14px;
+  font-size: 12px;
   text-align: center;
 }
 
@@ -1164,30 +1235,6 @@ h2 {
   line-height: 19px;
   text-transform: capitalize;
   font-weight: 400;
-}
-
-input,
-select {
-  display: block;
-  width: 100%;
-  font: inherit;
-  /* margin-top: 0.5rem; */
-}
-
-select {
-  width: auto;
-}
-
-input[type='checkbox'],
-input[type='radio'] {
-  display: inline-block;
-  width: auto;
-  margin: 0 8px 0 0;
-}
-
-input[type='checkbox'] + label,
-input[type='radio'] + label {
-  font-weight: normal;
 }
 
 .btn {

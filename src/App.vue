@@ -1,17 +1,15 @@
 <template>
   <div>
     <the-header></the-header>
-    <the-form></the-form>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import TheForm from './components/TheForm.vue';
 import TheHeader from './components/TheHeader.vue';
 
 export default {
   components: {
-    TheForm,
     TheHeader,
   },
 };
@@ -41,6 +39,6 @@ body {
   background-color: #eee;
   line-height: 1.5;
   color: #373a3c !important;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.05em;
 }
 </style>
