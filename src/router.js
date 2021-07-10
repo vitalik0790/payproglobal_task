@@ -8,7 +8,7 @@ const router = createRouter({
         { path: '/', redirect: '/payment' },
         { path: '/payment', component: TheForm },
         { path: '/thankyou', component: ThankYouPage },
-    ]
+    ],
 })
 
 export default router;

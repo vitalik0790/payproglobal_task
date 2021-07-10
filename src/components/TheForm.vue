@@ -1143,7 +1143,7 @@ label {
 @media screen and (min-width: 768px) {
   .fixed-container {
     position: fixed;
-    top: 75px;
+    top: 110px;
     width: 306px;
   }
 }

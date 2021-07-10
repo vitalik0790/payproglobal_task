@@ -7,16 +7,57 @@
         alt="logo"
       />
       <div class="navigation">
-        <nav>
-          <div class="round"></div>
-          <div class="round"></div>
-        </nav>
+        <div class="wrapper">
+          <nav>
+            <div class="first">
+              <div class="round" id="round">1</div>
+              <div class="products">Продукты</div>
+            </div>
+            <hr />
+            <div class="second">
+              <div class="round" id="round">2</div>
+              <div class="products">Оформить заказ</div>
+            </div>
+          </nav>
+        </div>
       </div>
     </div>
   </header>
 </template>
 
+ <script>
+export default {};
+</script>
+
 <style scoped>
+div .active {
+  background: #1473e6;
+  color: #fff;
+  border: none;
+}
+hr {
+  position: absolute;
+  width: 122px;
+  top: 5px;
+  left: 64px;
+  border: none;
+  border-top: 2px dotted #ddd;
+}
+.products {
+  text-align: center;
+}
+
+.navigation {
+  padding-top: 15px;
+}
+
+.first {
+  margin-right: 50px;
+}
+
+.second {
+}
+
 .header-container {
   background: #fff;
   width: 100%;
@@ -27,12 +68,17 @@
 
 img {
   display: block;
-  padding: 12px 0;
+  padding: 23px 0;
+}
+
+.wrapper {
+  margin: 0 auto;
+  width: 250px;
 }
 
 nav {
   display: flex;
-  margin: 0 auto;
+  position: relative;
 }
 
 .round {
@@ -43,5 +89,8 @@ nav {
   border-radius: 28px;
   line-height: 26px;
   text-align: center;
+  color: #999;
+  border: 1px solid #d6d6d6;
+  margin: 0 auto;
 }
 </style>
