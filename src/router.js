@@ -6,8 +6,8 @@ const router = createRouter({
     history: createWebHistory(),
     routes: [
         { path: '/', redirect: '/payment' },
-        { path: '/payment', component: TheForm },
-        { path: '/thankyou', component: ThankYouPage },
+        { path: '/payment', name: 'payment', component: TheForm },
+        { path: '/thankyou', name: 'thankyou', component: ThankYouPage },
     ],
 })
 

@@ -10,13 +10,30 @@
         <div class="wrapper">
           <nav>
             <div class="first">
-              <div class="round" id="round">1</div>
-              <div class="products">Продукты</div>
+              <div class="round" :class="{ active: $route.name === 'payment' }">
+                1
+              </div>
+              <div
+                class="products"
+                :class="{ activee: $route.name === 'payment' }"
+              >
+                Продукты
+              </div>
             </div>
             <hr />
             <div class="second">
-              <div class="round" id="round">2</div>
-              <div class="products">Оформить заказ</div>
+              <div
+                class="round"
+                :class="{ active: $route.name === 'thankyou' }"
+              >
+                2
+              </div>
+              <div
+                class="products"
+                :class="{ activee: $route.name === 'thankyou' }"
+              >
+                Оформить заказ
+              </div>
             </div>
           </nav>
         </div>
@@ -30,6 +47,9 @@ export default {};
 </script>
 
 <style scoped>
+div .activee {
+  color: #1473e6;
+}
 div .active {
   background: #1473e6;
   color: #fff;
@@ -45,6 +65,8 @@ hr {
 }
 .products {
   text-align: center;
+  color: #999;
+  font-weight: 200;
 }
 
 .navigation {
@@ -53,9 +75,6 @@ hr {
 
 .first {
   margin-right: 50px;
-}
-
-.second {
 }
 
 .header-container {
@@ -68,7 +87,7 @@ hr {
 
 img {
   display: block;
-  padding: 23px 0;
+  padding: 30px 0;
 }
 
 .wrapper {

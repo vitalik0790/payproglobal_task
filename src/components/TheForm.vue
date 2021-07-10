@@ -109,7 +109,7 @@
                   @blur="validateUserName"
                 />
                 <p class="error-message" v-if="userNameValidity === 'invalid'">
-                  Имя является обязательным полом.
+                  Имя является обязательным полем.
                 </p>
               </div>
 
@@ -131,7 +131,7 @@
                   class="error-message"
                   v-if="userSurnameValidity === 'invalid'"
                 >
-                  Фамилия является обязательным полом.
+                  Фамилия является обязательным полем.
                 </p>
               </div>
             </div>
@@ -827,6 +827,7 @@ export default {
       securityCode: '',
       payPalEmail: '',
       coupon: false,
+      isActive: true,
     };
   },
 
@@ -922,7 +923,7 @@ export default {
       this.payPalEmail = '';
       console.log('Coupon: ' + this.coupon);
       this.coupon = false;
-
+      this.isActive = false;
       this.$router.push('/thankyou');
     },
   },
