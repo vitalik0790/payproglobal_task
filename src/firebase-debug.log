@@ -1,0 +1,21 @@
+[debug] [2021-07-11T21:17:46.446Z] ----------------------------------------------------------------------
+[debug] [2021-07-11T21:17:46.448Z] Command:       C:\Program Files (x86)\nodejs\node.exe C:\Users\Vitalik\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js init
+[debug] [2021-07-11T21:17:46.448Z] CLI Version:   9.16.0
+[debug] [2021-07-11T21:17:46.448Z] Platform:      win32
+[debug] [2021-07-11T21:17:46.448Z] Node Version:  v14.15.0
+[debug] [2021-07-11T21:17:46.449Z] Time:          Mon Jul 12 2021 00:17:46 GMT+0300 (за східноєвропейським літнім часом)
+[debug] [2021-07-11T21:17:46.449Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2021-07-11T21:17:46.456Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2021-07-11T21:17:46.456Z] > authorizing via signed-in user (vitaliikovalchuk55@gmail.com)
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  C:\Users\Vitalik\Documents\goit-markup-hw\payproglobal_task\src
+
