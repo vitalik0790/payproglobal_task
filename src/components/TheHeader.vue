@@ -71,6 +71,13 @@ hr {
 
 .navigation {
   padding-top: 15px;
+  display: none;
+}
+
+@media screen and (min-width: 768px) {
+  .navigation {
+    display: block;
+  }
 }
 
 .first {

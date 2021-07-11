@@ -508,7 +508,10 @@
               </select>
             </div>
 
-            <div class="form-control">
+            <div
+              class="form-control"
+              :class="{ invalid: phoneNumberValidity === 'invalid' }"
+            >
               <input
                 type="phone"
                 class="form-control-sm"
@@ -517,7 +520,11 @@
                 placeholder="Номер телефона "
                 required=""
                 v-model="phoneNumber"
+                @blur="validatePhoneNumber"
               />
+              <p class="error-message" v-if="phoneNumberValidity === 'invalid'">
+                Пожалуйста, введите номер телефона правильно.
+              </p>
             </div>
 
             <div class="form-control checkbox">
@@ -816,6 +823,7 @@ export default {
       index: '',
       country: 'Ukraine',
       phoneNumber: '',
+      phoneNumberValidity: 'pending',
       license: false,
       licenseName: '',
       licenseEmail: '',
@@ -875,10 +883,21 @@ export default {
       }
     },
     validateCardNumber() {
-      if (this.cardNumber === '' && this.cardNumber.length < 16) {
+      if (this.cardNumber === '' || this.cardNumber.length != 16) {
         this.cardNumberValidity = 'invalid';
       } else {
         this.cardNumberValidity = 'valid';
+      }
+    },
+    validatePhoneNumber() {
+      if (
+        this.phoneNumber === '' ||
+        this.phoneNumber.length < 10 ||
+        this.phoneNumber.length > 13
+      ) {
+        this.phoneNumberValidity = 'invalid';
+      } else {
+        this.phoneNumberValidity = 'valid';
       }
     },
 
