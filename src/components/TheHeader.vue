@@ -54,6 +54,7 @@ div .active {
   background: #1473e6;
   color: #fff;
   border: none;
+  font-weight: 700;
 }
 hr {
   position: absolute;

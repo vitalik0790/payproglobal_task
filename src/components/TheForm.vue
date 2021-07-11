@@ -655,6 +655,7 @@
                 <div
                   v-if="wayOfPayment === 'Кредитная/Дебетовая Карта'"
                   class="form-control"
+                  :class="{ invalid: securityCodeValidity === 'invalid' }"
                 >
                   <input
                     type="text"
@@ -664,6 +665,7 @@
                     placeholder="Код безопасности*"
                     required=""
                     v-model="securityCode"
+                    @blur="validateSecurityCode"
                   />
                 </div>
               </div>
@@ -833,6 +835,7 @@ export default {
       month: '01',
       year: '21',
       securityCode: '',
+      securityCodeValidity: 'pending',
       payPalEmail: '',
       coupon: false,
       isActive: true,
@@ -898,6 +901,13 @@ export default {
         this.phoneNumberValidity = 'invalid';
       } else {
         this.phoneNumberValidity = 'valid';
+      }
+    },
+    validateSecurityCode() {
+      if (this.securityCode === '' || this.securityCode.length != 3) {
+        this.securityCodeValidity = 'invalid';
+      } else {
+        this.securityCodeValidity = 'valid';
       }
     },
 
@@ -1122,6 +1132,7 @@ label {
   .product-info {
     padding-left: 8px;
     padding-right: 8px;
+    padding-bottom: 171px;
   }
 }
 
@@ -1162,9 +1173,10 @@ label {
 
 @media screen and (min-width: 768px) {
   .fixed-container {
-    position: fixed;
+    position: sticky;
     top: 110px;
     width: 306px;
+    /* z-index: 5; */
   }
 }
 
