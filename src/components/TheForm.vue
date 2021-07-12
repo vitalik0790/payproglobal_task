@@ -54,11 +54,7 @@
               <label for="company">Корпоративная покупка</label>
             </div>
 
-            <div
-              class="form-control"
-              :class="{ invalid: companyNameValidity === 'invalid' }"
-              v-if="onCorporatePurchase"
-            >
+            <div v-if="onCorporatePurchase" class="form-control">
               <input
                 type="text"
                 class="form-control-sm"
@@ -67,28 +63,19 @@
                 placeholder="Название компании *"
                 required=""
                 v-model.trim="companyName"
-                @blur="validateCompany"
               />
-              <p class="error-message" v-if="companyNameValidity === 'invalid'">
-                Пожалуйста, укажите название компании правильно.
-              </p>
             </div>
 
-            <div
-              class="form-control"
-              :class="{ invalid: userEmailValidity === 'invalid' }"
-            >
+            <div class="form-control" :class="{ invalid: !userEmail.isValid }">
               <input
                 type="email"
                 class="form-control-sm"
                 id="email"
                 name="billing-email"
                 placeholder="Адрес электронной почты *"
-                required=""
-                v-model="userEmail"
-                @blur="validateUserEmail"
+                v-model.trim="userEmail.val"
               />
-              <p class="error-message" v-if="userEmailValidity === 'invalid'">
+              <p class="error-message" v-if="!userEmail.isValid">
                 Пожалуйста, укажите адрес электронной почты правильно.
               </p>
             </div>
@@ -96,7 +83,7 @@
             <div class="form-control">
               <div
                 class="form-control left"
-                :class="{ invalid: userNameValidity === 'invalid' }"
+                :class="{ invalid: !userName.isValid }"
               >
                 <input
                   type="text"
@@ -104,18 +91,16 @@
                   id="firstname"
                   name="billing-first-name"
                   placeholder="Имя *"
-                  required=""
-                  v-model="userName"
-                  @blur="validateUserName"
+                  v-model.trim="userName.val"
                 />
-                <p class="error-message" v-if="userNameValidity === 'invalid'">
+                <p class="error-message" v-if="!userName.isValid">
                   Имя является обязательным полем.
                 </p>
               </div>
 
               <div
                 class="form-control"
-                :class="{ invalid: userSurnameValidity === 'invalid' }"
+                :class="{ invalid: !userSurname.isValid }"
               >
                 <input
                   type="text"
@@ -123,34 +108,24 @@
                   id="lastname"
                   name="billing-last-name"
                   placeholder="Фамилия *"
-                  required=""
-                  v-model="userSurname"
-                  @blur="validateUserSurname"
+                  v-model.trim="userSurname.val"
                 />
-                <p
-                  class="error-message"
-                  v-if="userSurnameValidity === 'invalid'"
-                >
+                <p class="error-message" v-if="!userSurname.isValid">
                   Фамилия является обязательным полем.
                 </p>
               </div>
             </div>
 
-            <div
-              class="form-control"
-              :class="{ invalid: streetValidity === 'invalid' }"
-            >
+            <div class="form-control" :class="{ invalid: !street.isValid }">
               <input
                 type="text"
                 class="form-control-sm"
                 id="address"
                 name="billing-address"
                 placeholder="Полный адрес *"
-                required=""
-                v-model="street"
-                @blur="validateStreet"
+                v-model.trim="street.val"
               />
-              <p class="error-message" v-if="streetValidity === 'invalid'">
+              <p class="error-message" v-if="!street.isValid">
                 Пожалуйста, укажите адрес для выставления счета.
               </p>
             </div>
@@ -158,7 +133,7 @@
             <div class="form-control">
               <div
                 class="form-control left"
-                :class="{ invalid: cityValidity === 'invalid' }"
+                :class="{ invalid: !city.isValid }"
               >
                 <input
                   type="text"
@@ -166,11 +141,9 @@
                   id="city"
                   name="billing-city"
                   placeholder="Город *"
-                  required=""
-                  v-model="city"
-                  @blur="validateCity"
+                  v-model.trim="city.val"
                 />
-                <p class="error-message" v-if="cityValidity === 'invalid'">
+                <p class="error-message" v-if="!city.isValid">
                   Пожалуйста, укажите город для выставления счета.
                 </p>
               </div>
@@ -181,10 +154,9 @@
                   class="form-control-sm"
                   id="zip"
                   placeholder="Индекс "
-                  required=""
                   name="billing-zip"
                   data-action="BillingZipChange"
-                  v-model="index"
+                  v-model.trim="index"
                 />
               </div>
             </div>
@@ -510,7 +482,7 @@
 
             <div
               class="form-control"
-              :class="{ invalid: phoneNumberValidity === 'invalid' }"
+              :class="{ invalid: !phoneNumber.isValid }"
             >
               <input
                 type="number"
@@ -518,11 +490,9 @@
                 id="phone"
                 name="billing-contact-phone"
                 placeholder="Номер телефона "
-                required=""
-                v-model="phoneNumber"
-                @blur="validatePhoneNumber"
+                v-model.trim="phoneNumber.val"
               />
-              <p class="error-message" v-if="phoneNumberValidity === 'invalid'">
+              <p class="error-message" v-if="!phoneNumber.isValid">
                 Пожалуйста, введите номер телефона правильно.
               </p>
             </div>
@@ -546,7 +516,7 @@
                 name="billing-first-name-license"
                 placeholder="Имя лицензиата *"
                 required=""
-                v-model="licenseName"
+                v-model.trim="licenseName"
               />
             </div>
 
@@ -558,7 +528,7 @@
                 name="billing-email-license"
                 placeholder="Email лицензиата *"
                 required=""
-                v-model="licenseEmail"
+                v-model.trim="licenseEmail"
               />
             </div>
           </div>
@@ -582,7 +552,7 @@
             <div
               v-if="wayOfPayment === 'Кредитная/Дебетовая Карта'"
               class="form-control"
-              :class="{ invalid: cardNumberValidity === 'invalid' }"
+              :class="{ invalid: !cardNumber.isValid }"
             >
               <input
                 data-hj-masked=""
@@ -591,11 +561,9 @@
                 id="cardnum"
                 name="cc-number"
                 placeholder="Номер карты*"
-                required=""
-                v-model="cardNumber"
-                @blur="validateCardNumber"
+                v-model.trim="cardNumber.val"
               />
-              <p class="error-message" v-if="cardNumberValidity === 'invalid'">
+              <p class="error-message" v-if="!cardNumber.isValid">
                 Номер кредитной карты является обязательным полем.
               </p>
             </div>
@@ -655,7 +623,7 @@
                 <div
                   v-if="wayOfPayment === 'Кредитная/Дебетовая Карта'"
                   class="form-control"
-                  :class="{ invalid: securityCodeValidity === 'invalid' }"
+                  :class="{ invalid: !securityCode.isValid }"
                 >
                   <input
                     type="number"
@@ -663,9 +631,7 @@
                     id="cardnum"
                     name="cc-number"
                     placeholder="Код безопасности*"
-                    required=""
-                    v-model="securityCode"
-                    @blur="validateSecurityCode"
+                    v-model.trim="securityCode.val"
                   />
                 </div>
               </div>
@@ -787,7 +753,6 @@
               </div>
             </div>
             <div class="submit-block">
-              <!-- <router-link to="/thankyou"> -->
               <button
                 to="/thankyou"
                 type="submit"
@@ -796,7 +761,6 @@
               >
                 Разместить заказ
               </button>
-              <!-- </router-link> -->
             </div>
           </div>
         </form>
@@ -811,126 +775,125 @@ export default {
     return {
       corporatePurchase: false,
       companyName: '',
-      companyNameValidity: 'pending',
-      userEmail: '',
-      userEmailValidity: 'pending',
-      userName: '',
-      userNameValidity: 'pending',
-      userSurname: '',
-      userSurnameValidity: 'pending',
-      street: '',
-      streetValidity: 'pending',
-      city: '',
-      cityValidity: 'pending',
+      userEmail: {
+        val: '',
+        isValid: true,
+      },
+      userName: {
+        val: '',
+        isValid: true,
+      },
+      userSurname: {
+        val: '',
+        isValid: true,
+      },
+      street: {
+        val: '',
+        isValid: true,
+      },
+      city: {
+        val: '',
+        isValid: true,
+      },
       index: '',
       country: 'Ukraine',
-      phoneNumber: '',
-      phoneNumberValidity: 'pending',
+      phoneNumber: {
+        val: '',
+        isValid: true,
+      },
       license: false,
       licenseName: '',
       licenseEmail: '',
       wayOfPayment: 'Кредитная/Дебетовая Карта',
-      cardNumber: '',
-      cardNumberValidity: 'pending',
+      cardNumber: {
+        val: '',
+        isValid: true,
+      },
       month: '01',
       year: '21',
-      securityCode: '',
-      securityCodeValidity: 'pending',
+      securityCode: {
+        val: '',
+        isValid: true,
+      },
       payPalEmail: '',
       coupon: false,
-      isActive: true,
+      formIsValid: true,
     };
   },
 
   methods: {
-    validateCompany() {
-      if (this.companyName === '') {
-        this.companyNameValidity = 'invalid';
-      } else {
-        this.companyNameValidity = 'valid';
+    validateForm() {
+      this.formIsValid = true;
+
+      if (this.userEmail.val === '') {
+        this.userEmail.isValid = false;
+        this.formIsValid = false;
       }
-    },
-    validateUserEmail() {
-      if (this.userEmail === '') {
-        this.userEmailValidity = 'invalid';
-      } else {
-        this.userEmailValidity = 'valid';
+
+      if (this.userName.val === '') {
+        this.userName.isValid = false;
+        this.formIsValid = false;
       }
-    },
-    validateUserName() {
-      if (this.userName === '') {
-        this.userNameValidity = 'invalid';
-      } else {
-        this.userNameValidity = 'valid';
+
+      if (this.userSurname.val === '') {
+        this.userSurname.isValid = false;
+        this.formIsValid = false;
       }
-    },
-    validateUserSurname() {
-      if (this.userSurname === '') {
-        this.userSurnameValidity = 'invalid';
-      } else {
-        this.userSurnameValidity = 'valid';
+
+      if (this.street.val === '') {
+        this.street.isValid = false;
+        this.formIsValid = false;
       }
-    },
-    validateStreet() {
-      if (this.street === '') {
-        this.streetValidity = 'invalid';
-      } else {
-        this.streetValidity = 'valid';
+
+      if (this.city.val === '') {
+        this.city.isValid = false;
+        this.formIsValid = false;
       }
-    },
-    validateCity() {
-      if (this.city === '') {
-        this.cityValidity = 'invalid';
-      } else {
-        this.cityValidity = 'valid';
+
+      if (this.cardNumber.val === '' || this.cardNumber.val.length != 16) {
+        this.cardNumber.isValid = false;
+        this.formIsValid = false;
       }
-    },
-    validateCardNumber() {
-      if (this.cardNumber === '' || this.cardNumber.length != 16) {
-        this.cardNumberValidity = 'invalid';
-      } else {
-        this.cardNumberValidity = 'valid';
-      }
-    },
-    validatePhoneNumber() {
       if (
-        this.phoneNumber === '' ||
-        this.phoneNumber.length < 10 ||
-        this.phoneNumber.length > 13
+        this.phoneNumber.val === '' ||
+        this.phoneNumber.val.length < 10 ||
+        this.phoneNumber.val.length > 13
       ) {
-        this.phoneNumberValidity = 'invalid';
-      } else {
-        this.phoneNumberValidity = 'valid';
+        this.phoneNumber.isValid = false;
+        this.formIsValid = false;
       }
-    },
-    validateSecurityCode() {
-      if (this.securityCode === '' || this.securityCode.length != 3) {
-        this.securityCodeValidity = 'invalid';
-      } else {
-        this.securityCodeValidity = 'valid';
+      if (this.securityCode.val === '' || this.securityCode.val.length != 3) {
+        this.securityCode.isValid = false;
+        this.formIsValid = false;
       }
     },
 
     submitForm() {
+      this.validateForm();
+
+      if (!this.formIsValid) {
+        return;
+      }
+
       console.log('CorporatePurchase: ' + this.corporatePurchase);
       this.corporatePurchase = false;
       console.log('Companyname: ' + this.companyName);
       this.companyName = '';
-      console.log('Useremail: ' + this.userEmail);
+      console.log('Useremail: ' + this.userEmail.val);
       this.userEmail = '';
-      console.log('Username: ' + this.userName);
+      console.log('Username: ' + this.userName.val);
       this.userName = '';
-      console.log('Usersurname: ' + this.userSurname);
+      console.log('Usersurname: ' + this.userSurname.val);
       this.userSurname = '';
-      console.log('Street: ' + this.street);
+      console.log('Street: ' + this.street.val);
       this.street = '';
-      console.log('City: ' + this.city);
+      console.log('City: ' + this.city.val);
       this.city = '';
       console.log('Index: ' + this.index);
       this.index = '';
       console.log('Country: ' + this.country);
       this.country = 'Ukraine';
-      console.log('Phonenumber: ' + this.phoneNumber);
+      console.log('Phonenumber: ' + this.phoneNumber.val);
       this.phoneNumber = '';
       console.log('License: ' + this.license);
       this.license = false;
@@ -940,13 +903,13 @@ export default {
       this.licenseEmail = '';
       console.log('WayOfPayment: ' + this.wayOfPayment);
       this.wayOfPayment = 'Кредитная/Дебетовая Карта';
-      console.log('Cardnumber: ' + this.cardNumber);
+      console.log('Cardnumber: ' + this.cardNumber.val);
       this.cardNumber = '';
       console.log('Month: ' + this.month);
       this.month = '01';
       console.log('Year: ' + this.year);
       this.year = '21';
-      console.log('SecurityCode: ' + this.securityCode);
+      console.log('SecurityCode: ' + this.securityCode.val);
       this.securityCode = '';
       console.log('PayPal: ' + this.payPalEmail);
       this.payPalEmail = '';
