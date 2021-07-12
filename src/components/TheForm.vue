@@ -513,7 +513,7 @@
               :class="{ invalid: phoneNumberValidity === 'invalid' }"
             >
               <input
-                type="phone"
+                type="number"
                 class="form-control-sm"
                 id="phone"
                 name="billing-contact-phone"
@@ -586,7 +586,7 @@
             >
               <input
                 data-hj-masked=""
-                type="text"
+                type="number"
                 class="form-control-sm"
                 id="cardnum"
                 name="cc-number"
@@ -658,7 +658,7 @@
                   :class="{ invalid: securityCodeValidity === 'invalid' }"
                 >
                   <input
-                    type="text"
+                    type="number"
                     class="form-control-sm"
                     id="cardnum"
                     name="cc-number"
@@ -971,6 +971,11 @@ export default {
 </script>
 
 <style scoped>
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
 .checkbox {
   display: flex !important;
   align-items: center;
