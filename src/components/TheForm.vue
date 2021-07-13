@@ -27,7 +27,7 @@
               <span class="media-name">Antony Test</span>
             </div>
             <div class="price">
-              <span class="price">2,769.92 UAN</span>
+              <span class="price">2,769.92 UAH</span>
             </div>
           </div>
           <div class="total">
@@ -35,7 +35,7 @@
               <span>ИТОГО:</span>
             </div>
             <div class="total-2">
-              <span>2,769.92 UAN</span>
+              <span>2,769.92 UAH</span>
             </div>
           </div>
         </div>
@@ -890,47 +890,35 @@ export default {
         return;
       }
 
-      console.log('CorporatePurchase: ' + this.corporatePurchase);
-      this.corporatePurchase = false;
-      console.log('Companyname: ' + this.companyName);
-      this.companyName = '';
-      console.log('Useremail: ' + this.userEmail.val);
-      this.userEmail = '';
-      console.log('Username: ' + this.userName.val);
-      this.userName = '';
-      console.log('Usersurname: ' + this.userSurname.val);
-      this.userSurname = '';
-      console.log('Street: ' + this.street.val);
-      this.street = '';
-      console.log('City: ' + this.city.val);
-      this.city = '';
-      console.log('Index: ' + this.index);
-      this.index = '';
-      console.log('Country: ' + this.country);
-      this.country = 'Ukraine';
-      console.log('Phonenumber: ' + this.phoneNumber.val);
-      this.phoneNumber = '';
-      console.log('License: ' + this.license);
-      this.license = false;
-      console.log('LicenseName: ' + this.licenseName);
-      this.licenseName = '';
-      console.log('LicenseEmail: ' + this.licenseEmail);
-      this.licenseEmail = '';
-      console.log('WayOfPayment: ' + this.wayOfPayment);
-      this.wayOfPayment = 'Кредитная/Дебетовая Карта';
-      console.log('Cardnumber: ' + this.cardNumber.val);
-      this.cardNumber = '';
-      console.log('Month: ' + this.month);
-      this.month = '01';
-      console.log('Year: ' + this.year);
-      this.year = '21';
-      console.log('SecurityCode: ' + this.securityCode.val);
-      this.securityCode = '';
-      console.log('PayPal: ' + this.payPalEmail);
-      this.payPalEmail = '';
-      console.log('Coupon: ' + this.coupon);
-      this.coupon = false;
-      this.isActive = false;
+      fetch(
+        'https://payproglobal-task-default-rtdb.europe-west1.firebasedatabase.app/users.json',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            CompanyName: this.companyName,
+            UserEmail: this.userEmail.val,
+            UserName: this.userName.val,
+            UserSurname: this.userSurname.val,
+            Address: this.street.val,
+            City: this.city.val,
+            Index: this.index,
+            Country: this.country,
+            Phonenumber: this.phoneNumber.val,
+            LicenseName: this.licenseName,
+            LicenseEmail: this.licenseEmail,
+            WayOfPayment: this.wayOfPayment,
+            Cardnumber: this.cardNumber.val,
+            Month: this.month,
+            Year: this.year,
+            SecurityCode: this.securityCode.val,
+            PayPal: this.payPalEmail,
+          }),
+        }
+      );
+
       this.$router.push('/thankyou');
     },
   },
