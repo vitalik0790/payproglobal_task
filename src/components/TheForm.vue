@@ -2,7 +2,7 @@
   <div class="container">
     <base-dialog v-if="!formIsValid">
       <template #header>
-        <h2>Заполните все обязательные поля.</h2>
+        <h3>Заполните все обязательные поля.</h3>
       </template>
       <template #default>
         <p>Пожалуйста, убедитесь, что вы ввели все данные правильно!</p>
@@ -952,8 +952,8 @@ export default {
 .dialog-button {
   padding: 0.75rem 1.5rem;
   font-family: inherit;
-  background-color: #3a0061;
-  border: 1px solid #3a0061;
+  background-color: #1473e6;
+  border: 1px solid #1473e6;
   color: white;
   cursor: pointer;
   border-radius: 25px;
@@ -961,8 +961,8 @@ export default {
 
 button:hover,
 button:active {
-  background-color: #270041;
-  border-color: #270041;
+  background-color: #341899;
+  border-color: #341899;
 }
 
 .flat {
