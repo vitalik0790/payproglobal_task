@@ -1,5 +1,16 @@
 <template>
   <div class="container">
+    <base-dialog v-if="!formIsValid">
+      <template #header>
+        <h2>Заполните все обязательные поля.</h2>
+      </template>
+      <template #default>
+        <p>Пожалуйста, убедитесь, что вы ввели все данные правильно!</p>
+      </template>
+      <template #actions>
+        <button class="dialog-button" @click="confirmError">Okay</button>
+      </template>
+    </base-dialog>
     <!-- PRODUCT INFO -->
 
     <div class="product-info">
@@ -822,6 +833,10 @@ export default {
   },
 
   methods: {
+    confirmError() {
+      this.formIsValid = true;
+    },
+
     validateForm() {
       this.formIsValid = true;
 
@@ -934,6 +949,33 @@ export default {
 </script>
 
 <style scoped>
+.dialog-button {
+  padding: 0.75rem 1.5rem;
+  font-family: inherit;
+  background-color: #3a0061;
+  border: 1px solid #3a0061;
+  color: white;
+  cursor: pointer;
+  border-radius: 25px;
+}
+
+button:hover,
+button:active {
+  background-color: #270041;
+  border-color: #270041;
+}
+
+.flat {
+  background-color: transparent;
+  color: #3a0061;
+  border: none;
+}
+
+.flat:hover,
+.flat:active {
+  background-color: #edd2ff;
+}
+
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
@@ -1233,7 +1275,7 @@ h3 {
 h2 {
   font-size: 20px;
   line-height: 19px;
-  text-transform: capitalize;
+  /* text-transform: capitalize; */
   font-weight: 400;
 }
 
