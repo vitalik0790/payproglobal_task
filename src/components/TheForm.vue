@@ -781,6 +781,8 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   data() {
     return {
@@ -890,32 +892,26 @@ export default {
         return;
       }
 
-      fetch(
+      axios.post(
         'https://payproglobal-task-default-rtdb.europe-west1.firebasedatabase.app/users.json',
         {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            CompanyName: this.companyName,
-            UserEmail: this.userEmail.val,
-            UserName: this.userName.val,
-            UserSurname: this.userSurname.val,
-            Address: this.street.val,
-            City: this.city.val,
-            Index: this.index,
-            Country: this.country,
-            Phonenumber: this.phoneNumber.val,
-            LicenseName: this.licenseName,
-            LicenseEmail: this.licenseEmail,
-            WayOfPayment: this.wayOfPayment,
-            Cardnumber: this.cardNumber.val,
-            Month: this.month,
-            Year: this.year,
-            SecurityCode: this.securityCode.val,
-            PayPal: this.payPalEmail,
-          }),
+          CompanyName: this.companyName,
+          UserEmail: this.userEmail.val,
+          UserName: this.userName.val,
+          UserSurname: this.userSurname.val,
+          Address: this.street.val,
+          City: this.city.val,
+          Index: this.index,
+          Country: this.country,
+          Phonenumber: this.phoneNumber.val,
+          LicenseName: this.licenseName,
+          LicenseEmail: this.licenseEmail,
+          WayOfPayment: this.wayOfPayment,
+          Cardnumber: this.cardNumber.val,
+          Month: this.month,
+          Year: this.year,
+          SecurityCode: this.securityCode.val,
+          PayPal: this.payPalEmail,
         }
       );
 
