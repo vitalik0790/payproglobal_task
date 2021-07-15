@@ -834,56 +834,58 @@ export default {
     };
   },
 
+  validations: {},++
+
   methods: {
     confirmError() {
       this.formIsValid = true;
     },
 
-    validateForm() {
-      this.formIsValid = true;
+    // validateForm() {
+    //   this.formIsValid = true;
 
-      if (this.userEmail.val === '') {
-        this.userEmail.isValid = false;
-        this.formIsValid = false;
-      }
+    //   if (this.userEmail.val === '') {
+    //     this.userEmail.isValid = false;
+    //     this.formIsValid = false;
+    //   }
 
-      if (this.userName.val === '') {
-        this.userName.isValid = false;
-        this.formIsValid = false;
-      }
+    //   if (this.userName.val === '') {
+    //     this.userName.isValid = false;
+    //     this.formIsValid = false;
+    //   }
 
-      if (this.userSurname.val === '') {
-        this.userSurname.isValid = false;
-        this.formIsValid = false;
-      }
+    //   if (this.userSurname.val === '') {
+    //     this.userSurname.isValid = false;
+    //     this.formIsValid = false;
+    //   }
 
-      if (this.street.val === '') {
-        this.street.isValid = false;
-        this.formIsValid = false;
-      }
+    //   if (this.street.val === '') {
+    //     this.street.isValid = false;
+    //     this.formIsValid = false;
+    //   }
 
-      if (this.city.val === '') {
-        this.city.isValid = false;
-        this.formIsValid = false;
-      }
+    //   if (this.city.val === '') {
+    //     this.city.isValid = false;
+    //     this.formIsValid = false;
+    //   }
 
-      if (this.cardNumber.val === '' || this.cardNumber.val.length != 16) {
-        this.cardNumber.isValid = false;
-        this.formIsValid = false;
-      }
-      if (
-        this.phoneNumber.val === '' ||
-        this.phoneNumber.val.length < 10 ||
-        this.phoneNumber.val.length > 13
-      ) {
-        this.phoneNumber.isValid = false;
-        this.formIsValid = false;
-      }
-      if (this.securityCode.val === '' || this.securityCode.val.length != 3) {
-        this.securityCode.isValid = false;
-        this.formIsValid = false;
-      }
-    },
+    //   if (this.cardNumber.val === '' || this.cardNumber.val.length != 16) {
+    //     this.cardNumber.isValid = false;
+    //     this.formIsValid = false;
+    //   }
+    //   if (
+    //     this.phoneNumber.val === '' ||
+    //     this.phoneNumber.val.length < 10 ||
+    //     this.phoneNumber.val.length > 13
+    //   ) {
+    //     this.phoneNumber.isValid = false;
+    //     this.formIsValid = false;
+    //   }
+    //   if (this.securityCode.val === '' || this.securityCode.val.length != 3) {
+    //     this.securityCode.isValid = false;
+    //     this.formIsValid = false;
+    //   }
+    // },
 
     submitForm() {
       this.validateForm();
