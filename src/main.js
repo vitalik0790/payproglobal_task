@@ -11,3 +11,4 @@ app.use(router);
 app.component('base-dialog', BaseDialog);
 
 app.mount('#app');
+

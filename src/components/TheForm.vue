@@ -782,8 +782,13 @@
 
 <script>
 import axios from 'axios';
+import useVuelidate from '@vuelidate/core';
+import { required, email } from '@vuelidate/validators';
 
 export default {
+  setup() {
+    return { v$: useVuelidate() };
+  },
   data() {
     return {
       corporatePurchase: false,
